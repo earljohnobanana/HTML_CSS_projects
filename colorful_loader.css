@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+/* container */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 140px;
+  height: 120px;
+  gap: 10px;
+}
+
+.loading span {
+  display: inline-block;
+  width: 3px;         
+  height: 55px;          
+  border-radius: 999px;    
+
+  transform-origin: center; 
+  animation: scale 1.5s ease-in-out infinite; 
+
+  box-shadow: 0 0 12px currentColor;
+  opacity: 0.9;
+}
+
+/* colors + nicer wave delays */
+.loading span:nth-child(1) {
+  background: linear-gradient(180deg, #4c86f9, #2b5fff);
+  box-shadow: 0 0 18px rgba(76, 134, 249, 0.35);
+  animation-delay: -0.9s;
+}
+
+.loading span:nth-child(2) {
+  background: linear-gradient(180deg, #53ffd7, #12d7a7);
+  box-shadow: 0 0 18px rgba(83, 255, 215, 0.30);
+  animation-delay: -0.8s;
+}
+
+.loading span:nth-child(3) {
+  background: linear-gradient(180deg, #ff4df0, #c42bff);
+  box-shadow: 0 0 18px rgba(255, 77, 240, 0.30);
+  animation-delay:-0.7s;
+}
+
+.loading span:nth-child(4) {
+  background: linear-gradient(180deg, #ff4b4b, #ff1f6a);
+  box-shadow: 0 0 18px rgba(255, 75, 75, 0.30);
+  animation-delay: -0.6s;
+}
+
+.loading span:nth-child(5) {
+  background: linear-gradient(180deg, #7c4dff, #3a2bff);
+  box-shadow: 0 0 18px rgba(124, 77, 255, 0.30);
+  animation-delay: -0.5s;
+}
+
+/* smoother animation curve (same concept as yours) */
+@keyframes scale {
+  0%, 50%, 100% {
+    transform: scaleY(0.05);   /* very small at rest */
+    opacity: 0.4;
+  }
+  20% {
+    transform: scaleY(1);    /* smooth stretch */
+    opacity: 1;
+  }
+}
