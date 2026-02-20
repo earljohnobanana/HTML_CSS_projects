@@ -1,0 +1,179 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at 30% 20%, #111827, #000);
+}
+
+/* container */
+.card {
+  background-color: black;
+  color: white;
+  height: 250px;
+  width: min(520px, 92vw);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+/* panels */
+.card p {
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 10px;
+
+  background: rgb(15, 12, 12); /* inside stays dark */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition:
+    flex 0.5s cubic-bezier(.2,.8,.2,1),
+    transform 0.3s ease;
+}
+
+/* ========================= */
+/* 🔥 Neon Border Frame      */
+/* ========================= */
+
+.card p::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* border thickness */
+
+  background: linear-gradient(
+    120deg,
+    #4c86f9,
+    #ff4df0,
+    #00ffd5,
+    #4c86f9
+  );
+
+  /* Border-only mask */
+/* Border-only mask */
+-webkit-mask:
+  linear-gradient(#000 0 0) content-box,
+  linear-gradient(#000 0 0);
+-webkit-mask-composite: xor;
+
+mask:
+  linear-gradient(#000 0 0) content-box,
+  linear-gradient(#000 0 0);
+mask-composite: exclude;
+
+  opacity: 0;
+  filter: blur(6px);
+  transition: opacity 0.35s ease;
+}
+
+/* ========================= */
+/* ⚡ Moving Light Streak    */
+/* ========================= */
+
+.card p::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  border-radius: inherit;
+  padding: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,0.9) 50%,
+    rgba(255,255,255,0) 60%,
+    transparent 100%
+  );
+
+  transform: translateX(-60%) rotate(25deg);
+  opacity: 0;
+
+/* Border-only mask */
+-webkit-mask:
+  linear-gradient(#000 0 0) content-box,
+  linear-gradient(#000 0 0);
+-webkit-mask-composite: xor;
+
+mask:
+  linear-gradient(#000 0 0) content-box,
+  linear-gradient(#000 0 0);
+mask-composite: exclude;
+
+  filter: blur(1px);
+}
+
+/* ========================= */
+/* Hover Effects             */
+/* ========================= */
+
+.card p:hover {
+  flex: 4;
+  transform: translateY(-3px);
+}
+
+/* Show neon border */
+.card p:hover::before {
+  opacity: 1;
+}
+
+/* Activate moving streak */
+.card p:hover::after {
+  opacity: 1;
+  animation: streak 1.2s linear infinite;
+}
+
+/* ========================= */
+/* Streak Animation          */
+/* ========================= */
+
+@keyframes streak {
+  0%   { transform: translateX(-60%) rotate(25deg); }
+  100% { transform: translateX(60%) rotate(25deg); }
+}
+
+/* ========================= */
+/* Text Rotation             */
+/* ========================= */
+
+.card p span {
+  min-width: 13em;
+  transform: rotate(-90deg);
+  text-align: center;
+
+  transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+
+  letter-spacing: 0.2em;
+  font-weight: 600;
+}
+
+.card p:hover span {
+  transform: rotate(0deg);
+}
+
+/* ========================= */
+/* Accessibility             */
+/* ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .card p:hover::after {
+    animation: none;
+  }
+}
